@@ -1,6 +1,4 @@
-
-# Created by https://www.toptal.com/developers/gitignore/api/c,c++,visualstudiocode,windows,git,python
-# Edit at https://www.toptal.com/developers/gitignore?templates=c,c++,visualstudiocode,windows,git,python
+Data-Structures-and-Algorithms/
 
 ### C ###
 # Prerequisites
@@ -290,4 +288,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/c,c++,visualstudiocode,windows,git,python
+tempCodeRunnerFile.c
