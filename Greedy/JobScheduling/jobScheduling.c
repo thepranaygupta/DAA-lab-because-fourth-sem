@@ -1,6 +1,6 @@
-
 #include <stdio.h>
-#define n 6
+#include <stdlib.h>
+// #define n 6
 
 typedef struct s
 {
@@ -9,7 +9,7 @@ typedef struct s
     int deadline;
 } Job;
 
-void sortProfit(Job *a)
+void sortProfit(Job *a, int n)
 {
     int i, j;
     Job temp;
@@ -25,66 +25,74 @@ void sortProfit(Job *a)
     return;
 }
 
-void disp(Job *a, int m)
+void display(Job *a, int m)
 {
     int i;
-    printf("\n ID:\t");
+    printf("\nID:      \t");
     for (i = 0; i < m; i++)
     {
         printf("%d\t", a[i].id);
     }
-    printf("\n Profit:\t");
+    printf("\nProfit:  \t");
     for (i = 0; i < m; i++)
     {
         printf("%d\t", a[i].profit);
     }
-    printf("\n Deadline:\t");
+    printf("\nDeadline:\t");
     for (i = 0; i < m; i++)
     {
         printf("%d\t", a[i].deadline);
     }
+    return;
 }
 
 int main()
 {
-    Job pool[n];
-    int i, j, r, sz = 0;
+    int n;
+    printf("Enter the number of jobs: ");
+    scanf("%d", &n);
+    if (n < 1)
+    {
+        printf("\nInvalid Input\n");
+        return 0;
+    }
+    Job *pool = (Job *)malloc(n * sizeof(Job));
+    // Job pool[n];
+    int i, j, r, size = 0;
     int profit = 0;
     Job solution[n + 1];
     for (i = 0; i < n; i++)
     {
         pool[i].id = (i + 1);
-        printf("Enter Proffit value for %dth job: ", i + 1);
+        printf("Enter the profit for Job %d: ", i + 1);
         scanf("%d", &pool[i].profit);
-        printf("Enter deadline for %dth job: ", i + 1);
+        printf("Enter the deadline for Job %d: ", i + 1);
         scanf("%d", &pool[i].deadline);
     }
-    // disp(pool,n);
-    sortProfit(pool);
-    disp(pool, n);
+    sortProfit(pool, n);
+    display(pool, n);
     solution[0].id = 0;
     solution[0].profit = 0;
     solution[0].deadline = 0;
     solution[1] = pool[0];
-    sz = 1;
+    size = 1;
     for (i = 1; i < n; i++)
     {
-        r = sz;
+        r = size;
         while (((solution[r].deadline) > (pool[i].deadline)) && (solution[r].deadline != r))
         {
             r--;
         }
         if (((solution[r].deadline) <= (pool[i].deadline)) && ((pool[i].deadline) > r))
         {
-            for (j = sz; j >= r + 1; j--)
+            for (j = size; j >= r + 1; j--)
             {
                 solution[j + 1] = solution[j];
             }
             solution[j + 1] = pool[i];
-            sz++;
+            size++;
         }
     }
-    disp(solution, sz + 1);
-    getch();
+    display(solution, size + 1);
     return 0;
 }
